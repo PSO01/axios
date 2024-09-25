@@ -1,6 +1,7 @@
 "use strict";
 
 const db = require("../config/db");
+const user = require("../utils/user");
 
 // 사용자 정보 저장 클래스
 class UserStorage{

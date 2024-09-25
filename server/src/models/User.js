@@ -14,18 +14,18 @@ class User {
     
     // 사용자에게 입력 받은 id와 password가 db에 저장된 정보와 일치하는 지 확인
     async login() {
-        const client = this.body; 
+        const client = this.body;
         try {
             const userInfo = await UserStorage.getUserInfo(client.id);
-           
+
             // id가 없는 경우
             if(!userInfo) {
                 return {code: 401, message: "사용자 정보를 찾을 수 없습니다."};
             }
     
-            const {id, password} = userInfo; 
-            // 입력 받은 비밀번호와 DB에 저장된 비밀번호가 일치한 지 확인
-            const isPasswordCorrect = await user.isPasswordCorrect(client.password, password);
+            const {id, password} = userInfo;  
+            // 해싱된 비밀번호와 일치한지 확인
+            const isPasswordCorrect = user.hashedPassword(password, client.password);
             
             // id와 password가 모두 일치한지 확인
             if (client.id === id && isPasswordCorrect){
