@@ -25,7 +25,7 @@ class User {
     
             const {id, password} = userInfo;  
             // 해싱된 비밀번호와 일치한지 확인
-            const isPasswordCorrect = user.hashedPassword(password, client.password);
+            const isPasswordCorrect = await user.isPasswordCorrect(client.password, password);
             
             // id와 password가 모두 일치한지 확인
             if (client.id === id && isPasswordCorrect){

@@ -64,17 +64,24 @@ const RegisterPage = () =>{
         
         else {
             try{
-                const response = await axios.post(`${SERVER_URL}/register`, {
-                    id : id,
-                    email : mail,
-                    password : password
+                const response = await axios.post(`${SERVER_URL}/users`, {
+                    id : 'admin',
+                    email : 'admin@email.com',
+                    password : '1234'
                 });
     
                 if(response.status ===  201){
                     navigate("/login");
                 }
             }catch(err){
-                alert(err.response.data.message);
+                if(response.status === 409){
+                    console.log("이미 존재하는 아이디입니다.");
+                }
+
+                else(response.status === 400){
+                    console.log("회원가입에 실패하였습니다.")
+                }
+               
             };
         };
     };

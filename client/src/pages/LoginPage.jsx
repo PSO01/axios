@@ -44,6 +44,7 @@ const LoginPage = () =>{
                 id: id,
                 password: password,
             });
+            console.log(response.data);
             
             if(response.status === 200){
                 // 응답 헤더에서 AccessToken을 가져오기
@@ -51,11 +52,17 @@ const LoginPage = () =>{
                 navigate("/main/html");
             }
         }catch(err){
-            setLoginStat(err.response.data.message);
+            if(response.status === 401){
+                console.log("사용자의 정보를 찾을 수 없습니다");
+        }
+            if(response.status === 400){
+                console.log("로그인에 실패하였습니다.")
+            }
         }
     }
 
     return(
+        
         <UserForm formData={formData} handleSubmit={postLogin}/>
     );
 };
