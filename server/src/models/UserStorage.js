@@ -16,6 +16,7 @@ class UserStorage{
     // 새로운 사용자 정보를 DB에 저장
     static async insertUser (userInfo) {
             const {id, email, hashedPassword} = userInfo;
+            console.log(userInfo)
             const query = "INSERT INTO users(id, email, password) VALUES(?, ?, ?);"
             await db.connection(query, [id, email, hashedPassword]);
     };
